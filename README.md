@@ -1,90 +1,104 @@
-# Java Product Inventory System
+# Product Inventory Management System
 
-Sistema simples de gerenciamento de produtos desenvolvido em Java, focado em conceitos fundamentais de Programação Orientada a Objetos (POO), encapsulamento, validação de dados e controle de estoque.
+Sistema de gerenciamento de inventário desenvolvido em Java, focado em Programação Orientada a Objetos (POO), validação de dados, encapsulamento e controle de estoque.
 
-O projeto simula um pequeno sistema de inventário capaz de:
+O projeto simula um sistema real de inventário capaz de:
 
 * cadastrar produtos;
-* validar dados;
 * controlar estoque;
-* atualizar preços;
-* verificar disponibilidade de itens.
+* buscar produtos;
+* calcular valor total do inventário;
+* validar códigos únicos;
+* listar produtos indisponíveis.
 
-Ideal para estudo de:
-
-* Java;
-* POO;
-* regras de negócio;
-* modelagem de entidades;
-* manipulação de coleções.
+A aplicação foi construída utilizando conceitos sólidos de arquitetura orientada a objetos, tornando o sistema escalável e preparado para futuras evoluções.
 
 ---
 
 # 📌 Funcionalidades
 
-## Gerenciamento de Produtos
+## 📦 Gerenciamento de Produtos
 
 * Cadastro de produtos;
-* Armazenamento em lista dinâmica (`ArrayList`);
-* Exibição formatada de informações.
+* Remoção de produtos;
+* Busca por ID;
+* Busca por código de barras;
+* Listagem completa do inventário.
 
 ---
 
-## Controle de Estoque
+## 📊 Controle de Estoque
 
 * Adição de estoque;
 * Remoção de estoque;
-* Validação de quantidade disponível.
+* Verificação de disponibilidade;
+* Identificação de produtos indisponíveis.
 
 ---
 
-## Regras de Negócio
+## 💰 Controle Financeiro
 
-* Impede preços negativos;
-* Impede estoque negativo;
-* Valida remoções inválidas;
-* Verifica disponibilidade do produto.
+* Atualização de preços;
+* Cálculo automático do valor total do inventário.
 
 ---
 
-## Organização Orientada a Objetos
+## 🔒 Validações de Segurança
 
-* Encapsulamento;
-* Métodos específicos para operações;
-* Separação entre entidade e execução.
+O sistema impede:
+
+* preços negativos;
+* estoque negativo;
+* IDs duplicados;
+* códigos de barras duplicados;
+* produtos nulos;
+* remoções inválidas.
 
 ---
 
 # 🛠 Tecnologias Utilizadas
 
-| Tecnologia                      | Finalidade                      |
-| ------------------------------- | ------------------------------- |
-| Java                            | Linguagem principal             |
-| ArrayList                       | Armazenamento dinâmico          |
-| Programação Orientada a Objetos | Estrutura do sistema            |
-| Exception Handling              | Validação e tratamento de erros |
-| CLI                             | Interface via terminal          |
+| Tecnologia         | Finalidade                                |
+| ------------------ | ----------------------------------------- |
+| Java               | Linguagem principal                       |
+| ArrayList          | Estrutura dinâmica de armazenamento       |
+| POO                | Modelagem do sistema                      |
+| Exception Handling | Validação e proteção de regras de negócio |
+| CLI                | Interface via terminal                    |
 
 ---
 
 # 📂 Estrutura do Projeto
 
-```bash id="okbq1x"
-ProductInventorySystem/
+```bash id="0q3x8m"
+ProductInventoryManagement/
  └── src/
       ├── Product.java
+      ├── Inventory.java
       └── Main.java
 ```
 
 ---
 
-# 🏗 Estrutura da Classe Product
+# 🏗 Arquitetura do Sistema
 
-A classe `Product` representa a entidade principal do sistema.
+O projeto foi dividido em responsabilidades específicas.
+
+| Classe      | Responsabilidade              |
+| ----------- | ----------------------------- |
+| `Product`   | Representa a entidade produto |
+| `Inventory` | Gerencia o inventário         |
+| `Main`      | Inicializa e testa o sistema  |
+
+---
+
+# 📦 Classe Product
+
+A classe `Product` representa os produtos do sistema.
 
 ## Atributos
 
-```java id="7d7r4t"
+```java id="p8z69z"
 private int id;
 private String name;
 private String description;
@@ -97,15 +111,39 @@ private String supplier;
 
 ---
 
-## Responsabilidades da Classe
+## Funcionalidades da Classe
 
-| Método                | Responsabilidade          |
-| --------------------- | ------------------------- |
-| `getFormattedInfo()`  | Exibir dados formatados   |
-| `addStock()`          | Adicionar estoque         |
-| `removeStock()`       | Remover estoque           |
-| `updatePrice()`       | Atualizar preço           |
-| `checkAvailability()` | Verificar disponibilidade |
+| Método                | Função                          |
+| --------------------- | ------------------------------- |
+| `addStock()`          | Adiciona estoque                |
+| `removeStock()`       | Remove estoque                  |
+| `updatePrice()`       | Atualiza preço                  |
+| `checkAvailability()` | Verifica disponibilidade        |
+| `toString()`          | Exibe dados formatados          |
+| Getters               | Acesso seguro aos atributos     |
+| Setters               | Atualização controlada de dados |
+
+---
+
+# 📦 Classe Inventory
+
+Responsável pelo gerenciamento do inventário.
+
+---
+
+## Funcionalidades
+
+| Método                         | Função                         |
+| ------------------------------ | ------------------------------ |
+| `addProduct()`                 | Adiciona produtos              |
+| `removeProduct()`              | Remove produtos                |
+| `findProductById()`            | Busca produto por ID           |
+| `findProductByBarcode()`       | Busca por código de barras     |
+| `listProducts()`               | Retorna lista de produtos      |
+| `displayInventory()`           | Exibe inventário               |
+| `displayUnavailableProducts()` | Exibe produtos sem estoque     |
+| `getInventoryValue()`          | Calcula valor total            |
+| `getTotalProducts()`           | Retorna quantidade de produtos |
 
 ---
 
@@ -114,7 +152,7 @@ private String supplier;
 ## Pré-requisitos
 
 * Java JDK 17+;
-* IDE Java ou terminal.
+* IDE Java ou terminal configurado.
 
 Sugestões:
 
@@ -126,7 +164,7 @@ Sugestões:
 
 ## Compilar o Projeto
 
-```bash id="nqqqna"
+```bash id="wb2qme"
 javac Main.java
 ```
 
@@ -134,7 +172,7 @@ javac Main.java
 
 ## Executar o Projeto
 
-```bash id="0m2qrz"
+```bash id="lx7lxa"
 java Main
 ```
 
@@ -142,7 +180,7 @@ java Main
 
 # 💻 Exemplo de Saída
 
-```text id="31np6e"
+```text id="t9wmga"
 =========== PRODUCT ===========
 Product: Notebook
 Price: $3500.00
@@ -154,184 +192,144 @@ Supplier: Dell
 
 ---
 
-# 🧠 Arquitetura e Decisões Técnicas
+## Busca de Produto
 
-O projeto segue uma arquitetura simples baseada em Programação Orientada a Objetos.
-
----
-
-## Separação de Responsabilidades
-
-### Classe `Product`
-
-Responsável por:
-
-* representar o produto;
-* aplicar regras de negócio;
-* controlar estoque;
-* validar dados.
+```text id="7db16g"
+Found product:
+=========== PRODUCT ===========
+Product: Mouse
+Price: $120.00
+Quantity: 50
+Category: Accessories
+Supplier: Logitech
+==============================
+```
 
 ---
 
-### Classe `Main`
+## Estatísticas do Inventário
 
-Responsável por:
-
-* iniciar a aplicação;
-* criar produtos;
-* testar funcionalidades;
-* exibir resultados.
+```text id="b9v7gi"
+Total products: 3
+Inventory value: $53000.00
+```
 
 ---
 
-# ✅ Conceitos de POO Aplicados
+# 🧠 Decisões Técnicas
+
+---
+
+## ✔ Uso de `toString()`
+
+O método:
+
+```java id="w6stsh"
+@Override
+public String toString()
+```
+
+foi utilizado para melhorar:
+
+* legibilidade;
+* reutilização;
+* integração com `System.out.println()`.
+
+Isso elimina necessidade de métodos extras de exibição.
+
+---
 
 ## ✔ Encapsulamento
 
-Os atributos da classe são privados:
+Todos os atributos são privados:
 
-```java id="x5b8an"
+```java id="78dh1v"
 private String name;
 private double price;
 ```
 
-Isso protege o estado interno do objeto.
+O acesso ocorre via:
+
+* getters;
+* setters.
 
 ---
 
-## ✔ Responsabilidade Única
+## ✔ Validações Centralizadas
 
-Cada método possui apenas uma responsabilidade específica.
-
-Exemplo:
-
-```java id="1oj2k8"
-addStock()
-removeStock()
-updatePrice()
-```
-
----
-
-## ✔ Regras de Negócio Centralizadas
-
-As validações estão diretamente na entidade.
+As regras de negócio ficam dentro da própria entidade.
 
 Exemplo:
 
-```java id="nrd7pw"
+```java id="ofc5i7"
 if(price <= 0)
 ```
 
 ---
 
-## ✔ Reutilização
+## ✔ Controle de Integridade
 
-A classe `Product` pode ser reutilizada em:
+O sistema impede:
 
-* APIs;
-* sistemas web;
-* banco de dados;
-* aplicações desktop.
+* duplicação de IDs;
+* duplicação de código de barras.
 
 ---
 
-# ⚠ Problemas Identificados no Código
+## ✔ Programação Defensiva
 
-O código possui um pequeno erro de implementação.
+Uso de exceptions para proteger o sistema:
 
-Foi utilizado:
-
-```java id="g07i4f"
-displayInfo()
-```
-
-Mas o método criado foi:
-
-```java id="s8e5d0"
-getFormattedInfo()
-```
-
----
-
-## ✅ Correção
-
-Substituir:
-
-```java id="jlwmrb"
-product.displayInfo()
-```
-
-por:
-
-```java id="lf8fhr"
-product.getFormattedInfo()
+```java id="hn91s5"
+IllegalArgumentException
+IllegalStateException
 ```
 
 ---
 
 # ✅ Boas Práticas Aplicadas
 
-## ✔ Validação de Dados
+## ✔ Programação Orientada a Objetos
 
-O sistema impede:
-
-* preços inválidos;
-* estoque negativo;
-* remoções inconsistentes.
-
----
-
-## ✔ Uso de Exceptions
-
-Utilização de:
-
-```java id="4ek99g"
-IllegalArgumentException
-IllegalStateException
-```
-
-para proteger regras de negócio.
+* encapsulamento;
+* abstração;
+* responsabilidade única;
+* modularização.
 
 ---
 
-## ✔ Código Modular
+## ✔ Código Escalável
 
-A lógica está dividida em métodos específicos.
+Separação clara entre:
+
+* entidade;
+* gerenciamento;
+* execução.
 
 ---
 
 ## ✔ Legibilidade
 
-* nomes claros;
-* estrutura limpa;
-* fácil manutenção.
+* nomes descritivos;
+* métodos objetivos;
+* código limpo.
 
 ---
 
-## ✔ Organização Escalável
+## ✔ Reutilização
 
-A arquitetura permite futura evolução.
+A classe `Inventory` pode ser reutilizada em:
+
+* APIs REST;
+* sistemas web;
+* aplicações desktop;
+* microsserviços.
 
 ---
 
-# 🔮 Melhorias Futuras
+## ✔ Segurança de Dados
 
-Possíveis evoluções do projeto:
-
-* CRUD completo;
-* Busca por produto;
-* Persistência em banco de dados;
-* Interface gráfica;
-* API REST com Spring Boot;
-* Integração com MySQL/PostgreSQL;
-* Sistema de vendas;
-* Controle de usuários;
-* Relatórios;
-* Exportação CSV/PDF;
-* Testes unitários com JUnit;
-* Uso de Collections avançadas;
-* Implementação de camada Service e Repository.
+Validações evitam inconsistências no inventário.
 
 ---
 
@@ -341,34 +339,60 @@ Este projeto ajuda a praticar:
 
 * Programação Orientada a Objetos;
 * encapsulamento;
-* métodos;
-* construtores;
+* collections (`ArrayList`);
 * validações;
 * exceptions;
-* ArrayList;
+* modelagem de entidades;
 * regras de negócio;
-* organização de sistemas;
-* modelagem de entidades.
+* arquitetura de sistemas;
+* organização de código;
+* boas práticas em Java.
+
+---
+
+# 🔮 Melhorias Futuras
+
+Possíveis evoluções do projeto:
+
+* Persistência com MySQL/PostgreSQL;
+* API REST com Spring Boot;
+* Interface gráfica com JavaFX;
+* Integração com banco de dados;
+* Sistema de autenticação;
+* Relatórios PDF/Excel;
+* Busca avançada;
+* Filtros por categoria;
+* Ordenação de produtos;
+* Testes unitários com JUnit;
+* Camadas Service e Repository;
+* Uso de interfaces;
+* Persistência em JSON/XML;
+* Dockerização do sistema.
 
 ---
 
 # 🏗 Possível Evolução Arquitetural
 
-O sistema pode evoluir para:
+Estrutura futura recomendada:
 
-```bash id="1k39pd"
+```bash id="8v3u0n"
 src/
  ├── model/
  │    └── Product.java
  │
  ├── service/
- │    └── ProductService.java
+ │    └── InventoryService.java
  │
  ├── repository/
  │    └── ProductRepository.java
  │
  ├── exception/
- │    └── ProductException.java
+ │    ├── ProductNotFoundException.java
+ │    └── DuplicateProductException.java
+ │
+ ├── dto/
+ │
+ ├── util/
  │
  └── Main.java
 ```
